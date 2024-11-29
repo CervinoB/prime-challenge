@@ -3,6 +3,7 @@ import { When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import generateData from "../../support/utils/generateData";
 import login from "../../support/pages/loginPage";
 import home from "../../support/pages/homePage";
+import data from "../../support/data";
 
 const randomId: number = generateData.generateRandomId();
 const email: string = `jcervinobarbosa+prime.challenge${randomId}@gmail.com`;
@@ -76,4 +77,55 @@ Then(
     login.verifySigninResponseWrongPassword();
     login.alertWrongPassword();
   }
+);
+
+When("eu clico em “Finalizar” para realizar logout", () => {
+  home.visitHomePage();
+  home.navigateToLogin();
+  login.loginFillAndSubmit();
+
+  cy.get("a").contains("Finalizar").click({ force: true });
+
+  cy.get("button").contains("Logout").click();
+});
+
+Then("eu devo ser deslogado com sucesso", () => {
+  login.verifyLoginPage();
+});
+
+When("eu tento recuperar minha senha de acesso", () => {
+  home.visitHomePage();
+  home.navigateToLogin();
+  cy.get('a[href="/app/resetsenha"]').click();
+
+  cy.get("h1").should("have.text", "Recuperar Senha");
+  cy.get("#floatingInput").type(data.defaultEmail);
+});
+
+Then(
+  "eu devo receber um email com instruções para redefinir minha senha",
+  () => {
+    cy.intercept(
+      "POST",
+      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=**"
+    ).as("resetConfirmationCode");
+    cy.get("button").contains("Enviar").click();
+    cy.wait("@resetConfirmationCode")
+      .its("response.statusCode")
+      .should("eq", 200);
+    cy.get('div[role="alert"]').should(
+      "have.text",
+      "Email enviado com sucesso"
+    );
+  }
+);
+
+When(
+  "eu preencho as Informações do Candidato e clico em Finalizar e Enviar",
+  () => {}
+);
+
+Then(
+  "eu devo ver uma mensagem de confirmação indicando que as informações foram enviadas com sucesso",
+  () => {}
 );
