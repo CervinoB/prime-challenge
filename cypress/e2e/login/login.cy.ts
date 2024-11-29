@@ -6,7 +6,6 @@ import home from "../../support/pages/homePage";
 import data from "../../support/data";
 
 const randomId: number = generateData.generateRandomId();
-const password: string = data.defaultPassword;
 const email: string = `jcervinobarbosa+prime.challenge${randomId}@gmail.com`;
 
 When("eu tento criar uma nova conta com um email válido", () => {
@@ -15,7 +14,7 @@ When("eu tento criar uma nova conta com um email válido", () => {
   home.navigateToCreateAccount();
   login.verifyCreateAccountPage();
 
-  login.fillEmailAndPassword(email, password);
+  login.fillEmailAndPassword({ email: email });
   login.interceptSignupRequest();
   login.submitForm();
 });
@@ -33,7 +32,7 @@ When("eu tento criar uma nova conta com um email já cadastrado", () => {
   home.navigateToCreateAccount();
   login.verifyCreateAccountPage();
 
-  login.fillEmailAndPassword(data.defaultEmail, password);
+  login.fillEmailAndPassword();
   login.interceptSignupRequest();
   login.submitForm();
 });
@@ -52,7 +51,7 @@ When("eu insiro credenciais de login válidas", () => {
   home.navigateToLogin();
   login.verifyLoginPage();
 
-  login.fillEmailAndPassword(data.defaultEmail, password);
+  login.fillEmailAndPassword();
   login.interceptSigninRequest();
   login.submitForm();
 });
@@ -67,7 +66,7 @@ When("eu insiro uma senha inválida", () => {
     home.navigateToLogin();
     login.verifyLoginPage();
 
-    login.fillEmailAndPassword(data.defaultEmail, "123456");
+    login.fillEmailAndPassword({ password: "123456" });
     login.interceptSigninRequest();
     login.submitForm();
 

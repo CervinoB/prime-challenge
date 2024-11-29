@@ -1,9 +1,14 @@
+import data from "../data";
+
 const login = {
   inputEmail: 'input[type="email"]',
   inputPassword: 'input[type="password"]',
   buttonSubmitForm: "form > button",
 
-  fillEmailAndPassword(email: string, password: string) {
+  fillEmailAndPassword({
+    email = data.defaultEmail,
+    password = data.defaultPassword,
+  }: { email?: string; password?: string } = {}) {
     cy.get(login.inputEmail).clear().type(email);
     cy.get(login.inputPassword).clear().type(password);
   },
