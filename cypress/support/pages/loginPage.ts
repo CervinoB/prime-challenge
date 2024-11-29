@@ -61,7 +61,7 @@ const login = {
   },
 
   verifySigninResponseWrongPassword() {
-    cy.wait("@signupNewUser").then((interception) => {
+    cy.wait("@signinUser").then((interception) => {
       expect(interception.response?.statusCode).to.eq(400);
       expect(interception.response?.body.error.message).to.eq(
         "INVALID_PASSWORD"

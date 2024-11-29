@@ -61,19 +61,20 @@ Then("eu devo ser logado com sucesso", () => {
 });
 
 When("eu insiro uma senha inválida", () => {
-    home.visitHomePage();
+  home.visitHomePage();
 
-    home.navigateToLogin();
-    login.verifyLoginPage();
+  home.navigateToLogin();
+  login.verifyLoginPage();
 
-    login.fillEmailAndPassword({ password: "123456" });
-    login.interceptSigninRequest();
-    login.submitForm();
-
-    cy.wait("@signinUser")
+  login.fillEmailAndPassword({ password: "123456" });
+  login.interceptSigninRequest();
+  login.submitForm();
 });
 
 Then(
   "eu devo ver uma mensagem de erro indicando que a senha está incorreta",
-  () => {}
+  () => {
+    login.verifySigninResponseWrongPassword();
+    login.alertWrongPassword();
+  }
 );
