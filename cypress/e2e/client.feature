@@ -17,7 +17,6 @@ Feature: Cadastro e Gerenciamento de Clientes
     When eu altero informações válidas do cliente
     Then as alterações devem ser salvas com sucesso
 
-@focus
   Scenario: Validar Cadastro de Clientes com Email inválido e campos obrigatórios na aba Perfil
     When eu tento cadastrar um cliente com um email inválido e sem preencher os campos obrigatórios
     Then eu devo ver uma mensagem de erro indicando que o email é inválido e falta de campos preenchidos

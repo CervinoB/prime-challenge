@@ -22,6 +22,8 @@ import "./pages/homePage";
 
 import "./utils/generateData";
 
+import "./api/listClientApi"
+
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
