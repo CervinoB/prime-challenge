@@ -3,7 +3,6 @@ import { When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import generateData from "../../support/utils/generateData";
 import login from "../../support/pages/loginPage";
 import home from "../../support/pages/homePage";
-import data from "../../support/data";
 
 const randomId: number = generateData.generateRandomId();
 const email: string = `jcervinobarbosa+prime.challenge${randomId}@gmail.com`;

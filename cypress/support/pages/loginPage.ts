@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import data from "../data";
 
 const login = {
@@ -14,7 +15,7 @@ const login = {
   },
 
   submitForm() {
-    cy.get(login.buttonSubmitForm).click();
+    cy.get(login.buttonSubmitForm).click({ force: true });
   },
 
   alertEmailAlreadyExists() {
@@ -75,6 +76,13 @@ const login = {
 
   verifyLoginPage() {
     cy.get("h1").should("have.text", "Login");
+  },
+
+  loginFillAndSubmit() {
+    login.fillEmailAndPassword();
+    login.interceptSigninRequest();
+    login.submitForm();
+    login.verifySigninResponse();
   },
 };
 
