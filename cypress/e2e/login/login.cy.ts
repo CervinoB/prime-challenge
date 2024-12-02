@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 import { When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import generateData from "../../support/utils/generateData";
 import login from "../../support/pages/loginPage";

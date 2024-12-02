@@ -11,7 +11,7 @@ const listClientsSchema = {
       type: "string",
     },
     fone: {
-      type: "integer",
+      type: "string",
     },
     fotoPerfil: {
       type: "string",

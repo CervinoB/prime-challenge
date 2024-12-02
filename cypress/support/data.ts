@@ -27,6 +27,19 @@ const data = {
     tools: "Cypress",
     image: "cypress/fixtures/images/joaoPedro.jpg",
   },
+  clientDataApi: {
+    nome: "João Cervino",
+    fone: "61995872927",
+    email: "jcervinobarbosa@gmail.com",
+    cep: "85660-000",
+    endereco: "Rua Ipiranga, Centro Norte, Dois Vizinhos - Pr",
+    complemento: "Apto 107",
+    pais: "Brasil",
+    genero: "Masculino",
+    ferramentas: "Cypress",
+    fotoPerfil:
+      "https://unsplash.com/pt-br/fotografias/foto-em-tons-de-cinza-do-homem-XHVpWcr5grQ",
+  },
 };
 
 export default { ...data };

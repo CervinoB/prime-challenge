@@ -15,7 +15,6 @@
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^21.0.3",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.3",
-    "chai": "^5.1.2",
     "chai-json-schema": "^1.5.1",
     "mocha": "^10.8.2"
   }
