@@ -11,8 +11,13 @@ Feature: Verificação de Login na plataforma
         Then teste de campos obrigatórios
         Then teste de validação do e-mail e URL do perfil
 
-    @focus
     Scenario: Teste de deletar clientes
         When teste de exclusão bem-sucedida
         Then teste de cliente não encontrado
         Then teste de exclusão sem ID
+
+
+    Scenario: Teste de editar clientes
+        When teste de atualização bem-sucedida
+        Then teste de cliente não encontrado ao atualizar
+        Then teste de atualização sem campos

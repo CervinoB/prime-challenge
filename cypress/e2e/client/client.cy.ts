@@ -70,7 +70,6 @@ When("eu altero informações válidas do cliente", () => {
 });
 
 Then("as alterações devem ser salvas com sucesso", () => {
-  cy.get("button").contains("Excluir Foto").click();
   cy.get("button").contains("Salvar").click();
 });
 

@@ -1,9 +1,11 @@
+import { reporters } from "mocha";
 import data from "../data";
 
 const listClientApi = {
   listClientUrl: "https://api-challenge.primecontrol.com.br/listClients",
   addClientUrl: "https://api-challenge.primecontrol.com.br/addClient",
   deleteClientUrl: "https://api-challenge.primecontrol.com.br/deleteClient",
+  updateClientUrl: "https://api-challenge.primecontrol.com.br/updateClient",
   wrongUrl: "https://api-challenge.primecontrol.com.br/wrong",
 
   getClientsListAndAssert200() {
@@ -84,7 +86,9 @@ const listClientApi = {
         if (response.body.message) {
           expect(response.body.message).to.eq("Cliente não encontrado.");
         } else {
-            expect(response.body).to.include("<pre>Cannot DELETE /deleteClient/</pre>");
+          expect(response.body).to.include(
+            "<pre>Cannot DELETE /deleteClient/</pre>"
+          );
         }
       } else {
         expect(response.status).to.eq(200);
@@ -92,7 +96,29 @@ const listClientApi = {
     });
   },
 
-  
+  updateClient(clientId: string, updatedData: object) {
+    cy.request({
+      url: `${listClientApi.updateClientUrl}/${clientId}`,
+      method: "PUT",
+      body: updatedData,
+      failOnStatusCode: false,
+    }).then((response) => {
+      if (response.status === 500) {
+          expect(response.body.message).to.eq(
+            "Error updating client: 5 NOT_FOUND: No document to update: projects/pagina-teste-prime/databases/(default)/documents/clientes/21312"
+          );
+        
+      }else if (response.status === 400){
+        expect(response.body.message).to.eq(
+          "Informe ao menos um campo para atualizar"
+        );
+      } 
+      else {
+        expect(response.status).to.eq(200);
+      }
+      console.log(response.body);
+    });
+  },
 };
 
 export default { ...listClientApi };

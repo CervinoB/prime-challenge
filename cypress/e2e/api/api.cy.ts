@@ -14,7 +14,7 @@ Then("teste validação de endpoint", () => {
 });
 
 When("teste de adição bem-sucedida", () => {
-  // listClientApi.addClientSuccefully();
+  listClientApi.addClientSuccefully();
 });
 
 Then("teste de campos obrigatórios", () => {
@@ -48,10 +48,20 @@ Then("teste de exclusão sem ID", () => {
   listClientApi.deleteClient("")
 });
 
-Then("teste de cliente não encontrado",()=>{
 
+When("teste de atualização bem-sucedida", () => {
+  listClientApi.addClientSuccefully().then((id) => {
+    listClientApi.updateClient(id, { nome: "Updated Name" });
+  });
 });
 
-Then("teste de exclusão sem ID",()=>{
-  
+Then("teste de cliente não encontrado ao atualizar", () => {
+  listClientApi.updateClient("21312", { nome: "Updated Name" });
+});
+
+Then("teste de atualização sem campos", () => {
+  listClientApi.addClientSuccefully().then((id) => {
+    listClientApi.updateClient(id, {});
+  });
+
 });
