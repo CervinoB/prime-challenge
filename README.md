@@ -42,7 +42,7 @@ npx cypress open
 ou executar testes e2e individuais
 
 ```bash
-npm run test
+npm run --spec "<specPath>"
 ```
 
 ## URLs
